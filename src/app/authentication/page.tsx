@@ -8,8 +8,8 @@ const Authentication = () => {
     <div className="flex w-full max-w-sm flex-col gap-6 p-5">
       <Tabs defaultValue="sign-in">
         <TabsList>
-          <TabsTrigger value="sign-in">Account</TabsTrigger>
-          <TabsTrigger value="sign-up">Password</TabsTrigger>
+          <TabsTrigger value="sign-in">Entrar</TabsTrigger>
+          <TabsTrigger value="sign-up">Criar conta</TabsTrigger>
         </TabsList>
         <TabsContent value="sign-in">
           <SignInForm />
