@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import CategorySelector from "@/components/common/category-selector";
 import Header from "@/components/common/header";
 import ProductList from "@/components/common/product-list";
 import { Button } from "@/components/ui/button";
@@ -11,7 +12,8 @@ const Home = async () => {
       variants: true,
     },
   });
-  console.log(products);
+  const categories = await db.query.categoryTable.findMany({});
+
   return (
     <>
       <Header />
@@ -29,6 +31,10 @@ const Home = async () => {
         </div>
 
         <ProductList products={products} title="Mais Vendidos" />
+
+        <div className="px-5">
+          <CategorySelector categories={categories} />
+        </div>
 
         <div className="px-5">
           <Image
