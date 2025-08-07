@@ -30,7 +30,7 @@ const Cart = () => {
           </SheetHeader>
           {cartIsLoading && <div>Carregando...</div>}
           {cart?.items.map((item) => (
-            <div key={item.id} className="flex items-center justify-between">
+            <div key={item.id} className="flex items-center">
               <Image
                 src={item.productVariant.imageUrl}
                 alt={item.productVariant.product.name}

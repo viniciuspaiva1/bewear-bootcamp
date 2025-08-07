@@ -11,6 +11,7 @@ import { productTable, productVariantTable } from "@/db/schema";
 import { formatCentsToBRL } from "@/helpers/money";
 
 import AddToCartButton from "./components/add-to-cart-button";
+import ProductActions from "./components/product-actions";
 import QuantitySelector from "./components/quantinty-selector";
 import VariantSelector from "./components/variant-selector";
 
@@ -75,16 +76,7 @@ const ProductVariantPage = async ({ params }: ProductVariantPageProps) => {
           </h3>
         </div>
 
-        <div className="px-5">
-          <QuantitySelector />
-        </div>
-
-        <div className="flex flex-col space-y-4 px-5">
-          <AddToCartButton productVariantId={productVariant.id} quantity={1} />
-          <Button className="w-full rounded-full" variant="default">
-            Comprar agora
-          </Button>
-        </div>
+        <ProductActions productVariantId={productVariant.id} />
         <div className="px-5">
           <p className="text-sm">{productVariant.product.description}</p>
         </div>
