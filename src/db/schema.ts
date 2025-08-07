@@ -192,6 +192,7 @@ export const cartRelations = relations(cartTable, (params) => {
       fields: [cartTable.shippingAddressId],
       references: [shippingAddressTable.id],
     }),
+    items: params.many(cartItemTable),
   };
 });
 

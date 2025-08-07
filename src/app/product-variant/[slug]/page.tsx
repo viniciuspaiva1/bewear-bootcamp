@@ -10,6 +10,7 @@ import { db } from "@/db";
 import { productTable, productVariantTable } from "@/db/schema";
 import { formatCentsToBRL } from "@/helpers/money";
 
+import AddToCartButton from "./components/add-to-cart-button";
 import QuantitySelector from "./components/quantinty-selector";
 import VariantSelector from "./components/variant-selector";
 
@@ -79,9 +80,7 @@ const ProductVariantPage = async ({ params }: ProductVariantPageProps) => {
         </div>
 
         <div className="flex flex-col space-y-4 px-5">
-          <Button className="w-full rounded-full" variant="outline">
-            Adicionar ao carrinho
-          </Button>
+          <AddToCartButton productVariantId={productVariant.id} quantity={1} />
           <Button className="w-full rounded-full" variant="default">
             Comprar agora
           </Button>
