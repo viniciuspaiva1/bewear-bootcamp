@@ -28,7 +28,7 @@ const CartItem = ({
   const queryClient = useQueryClient();
 
   const removeProductFromCartMutation = useMutation({
-    mutationKey: ["remove-cart-product", id],
+    mutationKey: ["remove-cart-product"],
     mutationFn: () =>
       removeProductFromCart({
         cartItemId: id,
@@ -38,16 +38,17 @@ const CartItem = ({
     },
   });
 
-  const handleRemoveProductFromCart = () => {
+  const handleDeleteClick = () => {
     removeProductFromCartMutation.mutate(undefined, {
       onSuccess: () => {
-        toast.success("Produto removido do carrinho com sucesso!");
+        toast.success("Produto removido do carrinho.");
       },
       onError: () => {
         toast.error("Erro ao remover produto do carrinho.");
       },
     });
   };
+
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-4">
@@ -75,11 +76,7 @@ const CartItem = ({
         </div>
       </div>
       <div className="flex flex-col items-end justify-center gap-2">
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={handleRemoveProductFromCart}
-        >
+        <Button variant="outline" size="icon" onClick={handleDeleteClick}>
           <TrashIcon />
         </Button>
         <p className="text-sm font-bold">

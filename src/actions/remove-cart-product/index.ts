@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 
 import { db } from "@/db";
-import { cartItemTable, cartTable, productVariantTable } from "@/db/schema";
+import { cartItemTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
 import {
@@ -26,20 +26,21 @@ export const removeProductFromCart = async (
   }
 
   const cartItem = await db.query.cartItemTable.findFirst({
-    where: eq(cartItemTable.cartId, data.cartItemId),
+    where: (cartItem, { eq }) => eq(cartItem.id, data.cartItemId),
     with: {
       cart: true,
     },
   });
 
-  const cartDoesnotBelongToUser = cartItem?.cart.userId !== session.user.id;
-
-  if (cartDoesnotBelongToUser) {
-    throw new Error("Unauthorized");
-  }
+  console.log(data.cartItemId);
 
   if (!cartItem) {
     throw new Error("Cart item not found");
+  }
+  const cartDoesnotBelongToUser = cartItem.cart.userId !== session.user.id;
+
+  if (cartDoesnotBelongToUser) {
+    throw new Error("Unauthorized");
   }
 
   await db.delete(cartItemTable).where(eq(cartItemTable.id, cartItem.id));
