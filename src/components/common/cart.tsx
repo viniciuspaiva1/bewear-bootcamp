@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import { getCart } from "@/actions/get-cart";
 import { formatCentsToBRL } from "@/helpers/money";
+import { useCart } from "@/hooks/queries/use-cart";
 
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
@@ -18,10 +19,7 @@ import {
 import CartItem from "./cart-item";
 
 const Cart = () => {
-  const { data: cart, isPending: cartIsLoading } = useQuery({
-    queryKey: ["cart"],
-    queryFn: async () => getCart(),
-  });
+  const { data: cart, isPending: cartIsLoading } = useCart();
   return (
     <Sheet>
       <SheetTrigger>
@@ -41,6 +39,7 @@ const Cart = () => {
                       key={item.id}
                       id={item.id}
                       productName={item.productVariant.product.name}
+                      productVariantId={item.productVariantId}
                       productVariantName={item.productVariant.name}
                       productVariantImageUrl={item.productVariant.imageUrl}
                       productVariantTotalPriceInCents={
